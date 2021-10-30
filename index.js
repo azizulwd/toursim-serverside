@@ -19,6 +19,12 @@ async function run(){
         const database = client.db("ticketServices");
         const serviceCollection = database.collection('services');
 
+        // Get Api
+        app.get("/services", async(req, res)=>{
+            const cursor = serviceCollection.find({});
+            const services = await cursor.toArray();
+            res.send(services);
+        });
 
         // Post Api
         app.post("/service", async(req, res)=>{
